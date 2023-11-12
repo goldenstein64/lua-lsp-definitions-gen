@@ -1,0 +1,10 @@
+{
+	"Lua.workspace.library": [
+		"$LUA_ENVS/dkjson/library",
+		"$USERPROFILE/AppData/Roaming/Code/User/globalStorage/sumneko.lua/addonManager/addons/luafilesystem/module/library",
+	],
+	"Lua.diagnostics.globals": [
+		"lfs"
+	],
+	"Lua.workspace.checkThirdParty": false
+}
