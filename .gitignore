@@ -3,4 +3,3 @@
 /lua_modules
 /.luarocks
 /out
-*.rockspec
