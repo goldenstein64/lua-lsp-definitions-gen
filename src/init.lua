@@ -27,7 +27,7 @@ end
 local definitions, enums = compile:metamodel(object)
 
 ensureDir("out") do
-	local definitionsFile = assert(io.open("out/.lsp.d.lua", "w"))
+	local definitionsFile = assert(io.open("out/lsp.d.lua", "w"))
 	definitionsFile:write(tostring(definitions))
 	definitionsFile:close()
 end
