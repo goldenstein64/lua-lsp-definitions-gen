@@ -77,7 +77,7 @@ return function(compile, obj)
 	for _, entry in ipairs(obj.values) do
 		local entryBuffer = compile:buffer("\n")
 		if entry.documentation then
-			entryBuffer:append(compile:docComment(entry.documentation))
+			entryBuffer:append(compile:docComment(entry.documentation, 1))
 		end
 
 		local entryName = entry.name
