@@ -2,6 +2,58 @@ local json = require("dkjson").use_lpeg()
 local compile = require("compile")
 local lfs = require("lfs")
 
+local ENUM_PATH_FORMAT = "out/enum/%s.lua"
+
+local REQUEST_PATH_FORMAT = "out/routes/%s.lua"
+local REQUEST_DIR_FORMAT = "out/routes/%s"
+
+local REQUEST_READ_FORMAT = [[
+local register = require("lsp.register")
+
+---@param params lsp.Request.%s.params
+---@return lsp.Response.%s.result
+register["%s"] = function(params) end
+]]
+
+local REQUEST_WRITE_FORMAT = [[
+local request = require("lsp.request")
+
+---@return boolean, lsp.Response.%s.result | lsp.Response.%s.error
+function request.%s(params)
+	return request("%s", params)
+end
+]]
+
+local NOTIFICATION_PATH_FORMAT = "out/routes/%s.lua"
+local NOTIFICATION_DIR_FORMAT = "out/routes/%s"
+
+local NOTIFICATION_READ_FORMAT = [[
+local register = require("lsp.register")
+
+---@param params lsp.Notification.%s.params
+---@return nil -- notifications don't expect a response
+register["%s"] = function(params) end
+]]
+
+local NOTIFICATION_WRITE_FORMAT = [[
+local notify = require("lsp.notify")
+
+---@return lsp.Notification.%s.params
+function notify.%s() end
+]]
+
+local NOTIFICATION_READ_WRITE_FORMAT = [[
+local register = require("lsp.register")
+local notify = require("lsp.notify")
+
+---@return lsp.Notification.%s.params
+function notify.%s() end
+
+---@param params lsp.Notification.%s.params
+---@return nil -- notifications don't expect a response
+register["%s"] = function(params) end
+]]
+
 ---@param path string
 local function ensureDir(path)
 	local workingPath = ""
@@ -33,7 +85,6 @@ ensureDir("out") do
 end
 
 ensureDir("out/enum") do
-	local ENUM_PATH_FORMAT = "out/enum/%s.lua"
 	for name, buffer in pairs(enums) do
 		local outFile = assert(io.open(ENUM_PATH_FORMAT:format(name), "w"))
 		outFile:write(tostring(buffer))
@@ -43,26 +94,6 @@ end
 
 ensureDir("out/routes") do
 	do
-		local REQUEST_PATH_FORMAT = "out/routes/%s.lua"
-		local REQUEST_DIR_FORMAT = "out/routes/%s"
-
-		local REQUEST_READ_FORMAT = [[
-local register = require("lsp.register")
-
----@param params lsp.Request.%s.params
----@return lsp.Response.%s.result
-register["%s"] = function(params) end
-]]
-
-		local REQUEST_WRITE_FORMAT = [[
-local request = require("lsp.request")
-
----@return boolean, lsp.Response.%s.result | lsp.Response.%s.error
-function request.%s(params)
-	return request("%s", params)
-end
-]]
-
 		for _, request in ipairs(object.requests) do
 			local method = request.method
 			local methodTypeName = method:gsub("%$", "_"):gsub("/", "-")
@@ -94,36 +125,6 @@ end
 	end
 
 	do
-		local NOTIFICATION_PATH_FORMAT = "out/routes/%s.lua"
-		local NOTIFICATION_DIR_FORMAT = "out/routes/%s"
-
-		local NOTIFICATION_READ_FORMAT = [[
-local register = require("lsp.register")
-
----@param params lsp.Notification.%s.params
----@return nil -- notifications don't expect a response
-register["%s"] = function(params) end
-]]
-
-		local NOTIFICATION_WRITE_FORMAT = [[
-local notify = require("lsp.notify")
-
----@return lsp.Notification.%s.params
-function notify.%s() end
-]]
-
-		local NOTIFICATION_READ_WRITE_FORMAT = [[
-local register = require("lsp.register")
-local notify = require("lsp.notify")
-
----@return lsp.Notification.%s.params
-function notify.%s() end
-
----@param params lsp.Notification.%s.params
----@return nil -- notifications don't expect a response
-register["%s"] = function(params) end
-]]
-
 		for _, notification in ipairs(object.notifications) do
 			-- generate a file in routes
 			local method = notification.method
