@@ -31,5 +31,4 @@ build = {
       ["lsp_def_gen.compile.util.move"] = "src/compile/util/move.lua",
       ["lsp_def_gen.compile.util.maybeMove"] = "src/compile/util/maybeMove.lua",
    },
-   copy_directories = { "data" }
 }
