@@ -10,7 +10,7 @@ description = {
 }
 dependencies = {
    "lua >= 5.1",
-   "lfs ~> 1.8",
+   "luafilesystem ~> 1.8",
    "dkjson ~> 2.6"
 }
 build = {
