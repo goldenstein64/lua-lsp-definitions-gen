@@ -1,4 +1,4 @@
-local move = require("compile.util.move")
+local move = require("lsp_def_gen.compile.util.move")
 
 ---@param t1 table?
 ---@param t2 table

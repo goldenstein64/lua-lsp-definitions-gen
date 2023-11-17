@@ -1,4 +1,4 @@
-local move = require("compile.util.move")
+local move = require("lsp_def_gen.compile.util.move")
 
 ---Defines an unnamed structure of an object literal.
 ---@class lspm.StructureLiteral

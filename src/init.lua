@@ -1,5 +1,5 @@
 local json = require("dkjson").use_lpeg()
-local compile = require("compile")
+local compile = require("lsp_def_gen.compile")
 local lfs = require("lfs")
 
 local ENUM_PATH_FORMAT = "out/enum/%s.lua"

@@ -1,5 +1,5 @@
-local move = require("compile.util.move")
-local structureLiteral = require("compile.StructureLiteral")
+local move = require("lsp_def_gen.compile.util.move")
+local structureLiteral = require("lsp_def_gen.compile.StructureLiteral")
 
 ---Represents a base type like `string` or `DocumentUri`.
 ---@class lspm.BaseType

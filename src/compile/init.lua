@@ -1,18 +1,18 @@
-local Buffer = require("compile.util.Buffer")
+local Buffer = require("lsp_def_gen.compile.util.Buffer")
 
 local INDENT_CHAR = "\t"
 
 ---@class compile
 local compile = {
-	enumeration = require("compile.Enumeration"),
-	metamodel = require("compile.MetaModel"),
-	notification = require("compile.Notification"),
-	request = require("compile.Request"),
-	structure = require("compile.Structure"),
-	literal = require("compile.StructureLiteral"),
-	property = require("compile.Property"),
-	type = require("compile.Type"),
-	typeAlias = require("compile.TypeAlias"),
+	enumeration = require("lsp_def_gen.compile.Enumeration"),
+	metamodel = require("lsp_def_gen.compile.MetaModel"),
+	notification = require("lsp_def_gen.compile.Notification"),
+	request = require("lsp_def_gen.compile.Request"),
+	structure = require("lsp_def_gen.compile.Structure"),
+	literal = require("lsp_def_gen.compile.StructureLiteral"),
+	property = require("lsp_def_gen.compile.Property"),
+	type = require("lsp_def_gen.compile.Type"),
+	typeAlias = require("lsp_def_gen.compile.TypeAlias"),
 }
 
 ---@param sep? string
