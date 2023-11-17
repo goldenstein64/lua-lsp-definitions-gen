@@ -1,7 +1,7 @@
 package = "lsp-def-gen"
 version = "dev-1"
 source = {
-   url = "git+https://github.com/goldenstein64/bustez.git",
+   url = "git+https://github.com/goldenstein64/lsp-definitions-gen.git",
    dir = "lsp-def-gen"
 }
 description = {
