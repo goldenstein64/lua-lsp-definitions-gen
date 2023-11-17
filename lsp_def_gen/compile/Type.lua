@@ -1,4 +1,4 @@
-local move = require("lsp_def_gen.compile.util.move")
+local maybeMove = require("lsp_def_gen.compile.util.maybeMove")
 local structureLiteral = require("lsp_def_gen.compile.StructureLiteral")
 
 ---Represents a base type like `string` or `DocumentUri`.
@@ -77,13 +77,8 @@ function compileType.map(compile, obj, name)
 	local keyField, keyClasses = compile:type(obj.key, name .. ".key")
 	local valueField, valueClasses = compile:type(obj.value, name .. ".value")
 	local classes = {}
-	if keyClasses then
-		move(keyClasses, classes)
-	end
-
-	if valueClasses then
-		move(valueClasses, classes)
-	end
+	maybeMove(keyClasses, classes)
+	maybeMove(valueClasses, classes)
 
 	return string.format("{ [%s]: %s }", keyField, valueField), classes
 end
@@ -108,9 +103,7 @@ function compileType._and(compile, obj, name)
 	for i, item in ipairs(obj.items) do
 		local field, subClasses = compile:type(item, string.format("%s.%d", name, i))
 		table.insert(bases, tostring(field))
-		if subClasses then
-			move(subClasses, classes)
-		end
+		maybeMove(subClasses, classes)
 	end
 
 	local classBuffer = compile:buffer("\n")
@@ -139,9 +132,7 @@ function compileType._or(compile, obj, name)
 	for i, item in ipairs(obj.items) do
 		local field, subClasses = compile:type(item, string.format("%s.%d", name, i))
 		table.insert(stringified, tostring(field))
-		if subClasses then
-			move(subClasses, classes)
-		end
+		maybeMove(subClasses, classes)
 	end
 
 	return table.concat(stringified, " | "), #classes > 0 and classes or nil
@@ -165,9 +156,7 @@ function compileType.tuple(compile, obj, name)
 	for i, item in ipairs(obj.items) do
 		local type, subClasses = compile:type(item, string.format("%s.%d", name, i))
 		buffer:append(string.format("[%d]: %s,", i, tostring(type)))
-		if subClasses then
-			move(subClasses, classes)
-		end
+		maybeMove(subClasses, classes)
 	end
 	buffer:append("}")
 

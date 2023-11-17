@@ -1,4 +1,4 @@
-local move = require("lsp_def_gen.compile.util.move")
+local maybeMove = require("lsp_def_gen.compile.util.maybeMove")
 
 ---Defines an unnamed structure of an object literal.
 ---@class lspm.StructureLiteral
@@ -28,9 +28,7 @@ return function(compile, obj, name)
 	for _, property in ipairs(obj.properties) do
 		local field, subClasses = compile:property(property, name)
 		classBuffer:append(field)
-		if subClasses then
-			move(subClasses, classes)
-		end
+		maybeMove(subClasses, classes)
 	end
 
 	table.insert(classes, classBuffer)
