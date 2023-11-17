@@ -81,7 +81,7 @@ end
 			if dir == "clientToServer" then
 				content = REQUEST_READ_FORMAT:format(methodTypeName, methodTypeName, method)
 			elseif dir == "serverToClient" then
-				content = REQUEST_WRITE_FORMAT:format(methodTypeName, methodName)
+				content = REQUEST_WRITE_FORMAT:format(methodTypeName, methodTypeName, methodName, method)
 			else
 				error(string.format("unhandled message direction '%s'", dir))
 			end
