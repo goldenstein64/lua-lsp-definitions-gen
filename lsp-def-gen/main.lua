@@ -1,0 +1,1 @@
+require("lsp-def-gen")()

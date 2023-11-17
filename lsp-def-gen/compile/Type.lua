@@ -1,5 +1,5 @@
-local maybeMove = require("lsp_def_gen.compile.util.maybeMove")
-local structureLiteral = require("lsp_def_gen.compile.StructureLiteral")
+local maybeMove = require("lsp-def-gen.compile.util.maybeMove")
+local structureLiteral = require("lsp-def-gen.compile.StructureLiteral")
 
 ---Represents a base type like `string` or `DocumentUri`.
 ---@class lspm.BaseType

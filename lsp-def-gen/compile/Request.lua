@@ -1,4 +1,4 @@
-local maybeMove = require("lsp_def_gen.compile.util.maybeMove")
+local maybeMove = require("lsp-def-gen.compile.util.maybeMove")
 
 ---Represents a LSP request
 ---@class lspm.Request
