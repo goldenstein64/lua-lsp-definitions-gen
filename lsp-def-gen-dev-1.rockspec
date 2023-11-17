@@ -9,26 +9,28 @@ description = {
    license = "MIT"
 }
 dependencies = {
-   "lua ~> 5.1"
+   "lua >= 5.1",
+   "lfs ~> 1.8",
+   "dkjson ~> 2.6"
 }
 build = {
    type = "builtin",
    modules = {
-      ["lsp_def_gen.init"] = "src/init.lua",
+      ["lsp-def-gen.init"] = "lsp-def-gen/init.lua",
 
-      ["lsp_def_gen.compile.init"] = "src/compile/init.lua",
-      ["lsp_def_gen.compile.Enumeration"] = "src/compile/Enumeration.lua",
-      ["lsp_def_gen.compile.MetaModel"] = "src/compile/MetaModel.lua",
-      ["lsp_def_gen.compile.Notification"] = "src/compile/Notification.lua",
-      ["lsp_def_gen.compile.Property"] = "src/compile/Property.lua",
-      ["lsp_def_gen.compile.Request"] = "src/compile/Request.lua",
-      ["lsp_def_gen.compile.Structure"] = "src/compile/Structure.lua",
-      ["lsp_def_gen.compile.StructureLiteral"] = "src/compile/StructureLiteral.lua",
-      ["lsp_def_gen.compile.Type"] = "src/compile/Type.lua",
-      ["lsp_def_gen.compile.TypeAlias"] = "src/compile/TypeAlias.lua",
+      ["lsp-def-gen.compile.init"] = "lsp-def-gen/compile/init.lua",
+      ["lsp-def-gen.compile.Enumeration"] = "lsp-def-gen/compile/Enumeration.lua",
+      ["lsp-def-gen.compile.MetaModel"] = "lsp-def-gen/compile/MetaModel.lua",
+      ["lsp-def-gen.compile.Notification"] = "lsp-def-gen/compile/Notification.lua",
+      ["lsp-def-gen.compile.Property"] = "lsp-def-gen/compile/Property.lua",
+      ["lsp-def-gen.compile.Request"] = "lsp-def-gen/compile/Request.lua",
+      ["lsp-def-gen.compile.Structure"] = "lsp-def-gen/compile/Structure.lua",
+      ["lsp-def-gen.compile.StructureLiteral"] = "lsp-def-gen/compile/StructureLiteral.lua",
+      ["lsp-def-gen.compile.Type"] = "lsp-def-gen/compile/Type.lua",
+      ["lsp-def-gen.compile.TypeAlias"] = "lsp-def-gen/compile/TypeAlias.lua",
 
-      ["lsp_def_gen.compile.util.Buffer"] = "src/compile/util/Buffer.lua",
-      ["lsp_def_gen.compile.util.move"] = "src/compile/util/move.lua",
-      ["lsp_def_gen.compile.util.maybeMove"] = "src/compile/util/maybeMove.lua",
+      ["lsp-def-gen.compile.util.Buffer"] = "lsp-def-gen/compile/util/Buffer.lua",
+      ["lsp-def-gen.compile.util.move"] = "lsp-def-gen/compile/util/move.lua",
+      ["lsp-def-gen.compile.util.maybeMove"] = "lsp-def-gen/compile/util/maybeMove.lua",
    },
 }
