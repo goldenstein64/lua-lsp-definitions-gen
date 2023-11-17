@@ -1,12 +1,4 @@
-local move = require("lsp_def_gen.compile.util.move")
-
----@param t1 table?
----@param t2 table
-local function maybeMove(t1, t2)
-	if t1 then
-		move(t1, t2)
-	end
-end
+local maybeMove = require("lsp_def_gen.compile.util.maybeMove")
 
 ---Defines the structure of an object literal.
 ---@class lspm.Structure

@@ -1,12 +1,5 @@
-local move = require("lsp_def_gen.compile.util.move")
+local maybeMove = require("lsp_def_gen.compile.util.maybeMove")
 
----@param t1 table?
----@param t2 table
-local function maybeMove(t1, t2)
-	if t1 then
-		move(t1, t2)
-	end
-end
 
 ---Represents a LSP notification
 ---@class lspm.Notification
