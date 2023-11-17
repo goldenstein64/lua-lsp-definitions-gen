@@ -68,90 +68,92 @@ local function ensureDir(path)
 	end
 end
 
-local object do
-	local data = assert(io.open("data/metaModel.json"))
-	local content = data:read("a")
+return function()
+	local object do
+		local data = assert(io.open("data/metaModel.json"))
+		local content = data:read("a")
 
-	---@type lspm.MetaModel
-	object = assert(json.decode(content, 1, json.null))
-end
-
-local definitions, enums = compile:metamodel(object)
-
-ensureDir("out") do
-	local definitionsFile = assert(io.open("out/lsp.d.lua", "w"))
-	definitionsFile:write(tostring(definitions))
-	definitionsFile:close()
-end
-
-ensureDir("out/enum") do
-	for name, buffer in pairs(enums) do
-		local outFile = assert(io.open(ENUM_PATH_FORMAT:format(name), "w"))
-		outFile:write(tostring(buffer))
-		outFile:close()
+		---@type lspm.MetaModel
+		object = assert(json.decode(content, 1, json.null))
 	end
-end
 
-ensureDir("out/routes") do
-	do
-		for _, request in ipairs(object.requests) do
-			local method = request.method
-			local methodTypeName = method:gsub("%$", "_"):gsub("/", "-")
-			local methodName = method:gsub("%$/", ""):gsub("/", "_")
-			local moduleName = method:match("/([^/]+)$")
-			local parentPath
-			if moduleName then
-				parentPath = assert(method:match("^(.+)/[^/]+$"), "parent path not found")
-				ensureDir(REQUEST_DIR_FORMAT:format(parentPath))
-			else
-				moduleName = method
-			end
+	local definitions, enums = compile:metamodel(object)
 
-			local dir = request.messageDirection
-			local content
-			if dir == "clientToServer" then
-				content = REQUEST_READ_FORMAT:format(methodTypeName, methodTypeName, method)
-			elseif dir == "serverToClient" then
-				content = REQUEST_WRITE_FORMAT:format(methodTypeName, methodTypeName, methodName, method)
-			else
-				error(string.format("unhandled message direction '%s'", dir))
-			end
+	ensureDir("out") do
+		local definitionsFile = assert(io.open("out/lsp.d.lua", "w"))
+		definitionsFile:write(tostring(definitions))
+		definitionsFile:close()
+	end
 
-			local requestPath = REQUEST_PATH_FORMAT:format(method)
-			local requestFile = assert(io.open(requestPath, "w"))
-			requestFile:write(content)
-			requestFile:close()
+	ensureDir("out/enum") do
+		for name, buffer in pairs(enums) do
+			local outFile = assert(io.open(ENUM_PATH_FORMAT:format(name), "w"))
+			outFile:write(tostring(buffer))
+			outFile:close()
 		end
 	end
 
-	do
-		for _, notification in ipairs(object.notifications) do
-			-- generate a file in routes
-			local method = notification.method
-			local methodTypeName = method:gsub("%$", "_"):gsub("/", "-")
-			local methodName = method:gsub("%$/", ""):gsub("/", "_")
-			local moduleName = method:match("/([^/]+)$")
-			if moduleName then
-				local parentPath = assert(method:match("^(.+)/[^/]+$"), "parent path not found")
-				ensureDir(NOTIFICATION_DIR_FORMAT:format(parentPath))
-			else
-				moduleName = method
+	ensureDir("out/routes") do
+		do
+			for _, request in ipairs(object.requests) do
+				local method = request.method
+				local methodTypeName = method:gsub("%$", "_"):gsub("/", "-")
+				local methodName = method:gsub("%$/", ""):gsub("/", "_")
+				local moduleName = method:match("/([^/]+)$")
+				local parentPath
+				if moduleName then
+					parentPath = assert(method:match("^(.+)/[^/]+$"), "parent path not found")
+					ensureDir(REQUEST_DIR_FORMAT:format(parentPath))
+				else
+					moduleName = method
+				end
+
+				local dir = request.messageDirection
+				local content
+				if dir == "clientToServer" then
+					content = REQUEST_READ_FORMAT:format(methodTypeName, methodTypeName, method)
+				elseif dir == "serverToClient" then
+					content = REQUEST_WRITE_FORMAT:format(methodTypeName, methodTypeName, methodName, method)
+				else
+					error(string.format("unhandled message direction '%s'", dir))
+				end
+
+				local requestPath = REQUEST_PATH_FORMAT:format(method)
+				local requestFile = assert(io.open(requestPath, "w"))
+				requestFile:write(content)
+				requestFile:close()
 			end
+		end
+
+		do
+			for _, notification in ipairs(object.notifications) do
+				-- generate a file in routes
+				local method = notification.method
+				local methodTypeName = method:gsub("%$", "_"):gsub("/", "-")
+				local methodName = method:gsub("%$/", ""):gsub("/", "_")
+				local moduleName = method:match("/([^/]+)$")
+				if moduleName then
+					local parentPath = assert(method:match("^(.+)/[^/]+$"), "parent path not found")
+					ensureDir(NOTIFICATION_DIR_FORMAT:format(parentPath))
+				else
+					moduleName = method
+				end
 
 
-			local dir = notification.messageDirection
-			local content
-			if dir == "clientToServer" then
-				content = NOTIFICATION_READ_FORMAT:format(methodTypeName, method)
-			elseif dir == "serverToClient" then
-				content = NOTIFICATION_WRITE_FORMAT:format(methodTypeName, methodName)
-			else
-				content = NOTIFICATION_READ_WRITE_FORMAT:format(methodTypeName, methodName, methodTypeName, method)
+				local dir = notification.messageDirection
+				local content
+				if dir == "clientToServer" then
+					content = NOTIFICATION_READ_FORMAT:format(methodTypeName, method)
+				elseif dir == "serverToClient" then
+					content = NOTIFICATION_WRITE_FORMAT:format(methodTypeName, methodName)
+				else
+					content = NOTIFICATION_READ_WRITE_FORMAT:format(methodTypeName, methodName, methodTypeName, method)
+				end
+
+				local notificationFile = assert(io.open(NOTIFICATION_PATH_FORMAT:format(method), "w"))
+				notificationFile:write(content)
+				notificationFile:close()
 			end
-
-			local notificationFile = assert(io.open(NOTIFICATION_PATH_FORMAT:format(method), "w"))
-			notificationFile:write(content)
-			notificationFile:close()
 		end
 	end
 end
