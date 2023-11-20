@@ -1,8 +1,10 @@
 # LSP Definition Generator in Lua
 
 This project is used to generate type definitions for the Language Server
-Protocol (LSP), parsable by [LuaLS/lua-language-server](https://github.com/LuaLS/lua-language-server). All LSP definitions are namespaced under
-`lsp`.
+Protocol (LSP), parsable by
+[LuaLS/lua-language-server](https://github.com/LuaLS/lua-language-server).
+All LSP definitions are namespaced under `lsp`. All definitions for
+implementing my work-in-progress LSP library are namespaced under `lsp*`.
 
 This project is under MIT, so you can fork it for other kinds of type
 definitions.

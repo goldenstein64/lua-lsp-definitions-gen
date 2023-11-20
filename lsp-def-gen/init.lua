@@ -1,5 +1,6 @@
 local json = require("dkjson").use_lpeg()
 local compile = require("lsp-def-gen.compile")
+local compile_lib = require("lsp-def-gen.compile-lib")
 local lfs = require("lfs")
 
 local ENUM_PATH_FORMAT = "out/enum/%s.lua"
@@ -78,11 +79,16 @@ return function()
 	end
 
 	local definitions, enums = compile:metamodel(object)
+	local libDefs = compile_lib:metamodel(object)
 
 	ensureDir("out") do
 		local definitionsFile = assert(io.open("out/lsp.d.lua", "w"))
 		definitionsFile:write(tostring(definitions))
 		definitionsFile:close()
+
+		local libDefsFile = assert(io.open("out/lsp-lib.d.lua", "w"))
+		libDefsFile:write(tostring(libDefs))
+		libDefsFile:close()
 	end
 
 	ensureDir("out/enum") do
