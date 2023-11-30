@@ -57,7 +57,7 @@ return function(compile, obj)
 			maybeMove(subClasses, classes)
 			paramsType = compiled
 		else
-			paramsType = "dkjson.null?"
+			paramsType = "cjson.null?"
 		end
 		aliasBuffer:append(docBuffer)
 		aliasBuffer:append(PARAMS_ALIAS_FORMAT:format(notificationTypeName, paramsType))

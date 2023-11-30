@@ -56,7 +56,7 @@ return function(compile, obj)
 		"---signal a successful request.",
 		"---@class lsp.Response : lsp.Message",
 		"---The request id.",
-		"---@field id integer | string | dkjson.null",
+		"---@field id integer | string | cjson.null",
 		"---The result of a request. This member is REQUIRED on success. This member MUST",
 		"---NOT exist if there was an error invoking the method.",
 		"---@field result? unknown",
@@ -87,7 +87,7 @@ return function(compile, obj)
 		"---@field message string",
 		"---A primitive or structured value that contains additional information about",
 	 	"---the error. Can be omitted.",
-		"---@field data? string | number | boolean | table | dkjson.null"
+		"---@field data? string | number | boolean | table | cjson.null"
 	}))
 
 	local classes = {}
