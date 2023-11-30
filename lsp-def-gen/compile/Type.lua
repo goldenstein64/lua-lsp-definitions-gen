@@ -25,7 +25,7 @@ local baseTypeMap = {
 	RegExp = "lsp.RegExp",
 	string = "string",
 	boolean = "boolean",
-	null = "dkjson.null",
+	null = "cjson.null",
 }
 
 ---@param compile compile
