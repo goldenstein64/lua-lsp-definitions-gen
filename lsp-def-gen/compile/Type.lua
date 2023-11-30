@@ -59,7 +59,7 @@ end
 ---@return Buffer[]? classes
 function compileType.array(compile, obj, name)
 	local field, classes = compile:type(obj.element, name)
-	return tostring(field) .. "[]", classes
+	return "(" .. tostring(field) .. ")[]", classes
 end
 
 ---Represents a JSON object map (e.g. `interface Map<K extends string | integer, V> { [key: K] => V; }`).
