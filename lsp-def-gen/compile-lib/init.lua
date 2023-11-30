@@ -72,8 +72,8 @@ function compile_lib:metamodel(obj)
 				requestField:append(self:docComment(request.documentation))
 			end
 			requestField:append(string.format("---@param params lsp.Request.%s.params", methodTypeName))
-			requestField:append("---@return boolean ok")
-			requestField:append(string.format("---@return lsp.Response.%s.result | lsp.Response.%s.error result", methodTypeName, methodTypeName))
+			requestField:append(string.format("---@return lsp.Response.%s.result? result", methodTypeName))
+			requestField:append(string.format("---@return lsp.Response.%s.error? error", methodTypeName))
 			requestField:append(string.format("request[\"%s\"] = function(params) end", method))
 			requestBuffer:append(requestField)
 		else
