@@ -26,7 +26,7 @@ $ lua -e "require('lsp-def-gen.main')" # -> files generated in ./out
 Any `metaModel.json` file will work as long as it follows the
 `metaModel.schema.json` file from version 3.17.
 
-This project writes an `out/` directory with the follow contents:
+This project writes an `out/` directory with the following contents:
 
 The `enum/` directory contains all LSP enum definitions, written as Lua tables where keys are enum names and values are enum values. `lua-lsp-lib` already comes packaged with these in `lsp-lib.enum.*`. i.e. the `lsp-lib.enum.ErrorCodes` module points to the `ErrorCodes` LSP enum.
 
