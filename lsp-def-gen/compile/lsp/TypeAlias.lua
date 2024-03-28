@@ -7,7 +7,7 @@
 local NAME_FORMAT = "lsp.%s"
 local SUB_NAME_FORMAT = "lsp.%s.alias"
 
----@param compile compile
+---@param compile compile_lsp
 ---@param obj lspm.TypeAlias
 ---@return Buffer
 ---@return Buffer[]? classes

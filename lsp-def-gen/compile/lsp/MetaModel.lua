@@ -11,7 +11,7 @@ local maybeMove = require("lsp-def-gen.compile.util.maybeMove")
 ---@class lspm.MetaData
 ---@field version string
 
----@param compile compile
+---@param compile compile_lsp
 ---@param obj lspm.MetaModel
 ---@return Buffer definitions -- a buffer for the main lsp.d.lua file
 ---@return { [string]: Buffer } enums -- a key-value table of file names to buffers

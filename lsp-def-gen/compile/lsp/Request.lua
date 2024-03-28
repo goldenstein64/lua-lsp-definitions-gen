@@ -44,7 +44,7 @@ local ERROR_ALIAS_FORMAT = "---@alias %s.error %s"
 local RESPONSE_FORMAT = "lsp.Response.%s"
 local RESPONSE_CLASS_FORMAT = "---@class %s : lsp.Response"
 
----@param compile compile
+---@param compile compile_lsp
 ---@param obj lspm.Request
 ---@return Buffer
 ---@return Buffer[]? classes

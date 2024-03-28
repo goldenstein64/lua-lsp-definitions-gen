@@ -13,7 +13,7 @@ local maybeMove = require("lsp-def-gen.compile.util.maybeMove")
 ---@field mixins? lspm.Type[]
 ---@field since? string
 
----@param compile compile
+---@param compile compile_lsp
 ---@param obj lspm.Structure
 ---@return Buffer
 ---@return Buffer[]? classes

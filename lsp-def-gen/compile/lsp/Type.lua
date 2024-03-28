@@ -1,5 +1,5 @@
 local maybeMove = require("lsp-def-gen.compile.util.maybeMove")
-local structureLiteral = require("lsp-def-gen.compile.StructureLiteral")
+local structureLiteral = require("lsp-def-gen.compile.lsp.StructureLiteral")
 
 ---Represents a base type like `string` or `DocumentUri`.
 ---@class lspm.BaseType
@@ -28,7 +28,7 @@ local baseTypeMap = {
 	null = "cjson.null",
 }
 
----@param compile compile
+---@param compile compile_lsp
 ---@param obj lspm.BaseType
 ---@return string
 function compileType.base(compile, obj)
@@ -40,7 +40,7 @@ end
 ---@field kind "reference"
 ---@field name string
 
----@param compile compile
+---@param compile compile_lsp
 ---@param obj lspm.ReferenceType
 ---@return string
 function compileType.reference(compile, obj)
@@ -52,7 +52,7 @@ end
 ---@field kind "array"
 ---@field element lspm.Type
 
----@param compile compile
+---@param compile compile_lsp
 ---@param obj lspm.ArrayType
 ---@param name string
 ---@return string
@@ -68,7 +68,7 @@ end
 ---@field key lspm.MapKeyType | lspm.ReferenceType
 ---@field value lspm.Type
 
----@param compile compile
+---@param compile compile_lsp
 ---@param obj lspm.MapType
 ---@param name string
 ---@return string
@@ -92,7 +92,7 @@ end
 ---@field kind "and"
 ---@field items lspm.Type[]
 
----@param compile compile
+---@param compile compile_lsp
 ---@param obj lspm.AndType
 ---@param name string
 ---@return string
@@ -121,7 +121,7 @@ compileType["and"] = compileType._and
 ---@field kind "or"
 ---@field items lspm.Type[]
 
----@param compile compile
+---@param compile compile_lsp
 ---@param obj lspm.OrType
 ---@param name string
 ---@return string
@@ -144,7 +144,7 @@ compileType["or"] = compileType._or
 ---@field kind "tuple"
 ---@field items lspm.Type[]
 
----@param compile compile
+---@param compile compile_lsp
 ---@param obj lspm.TupleType
 ---@param name string
 ---@return string
@@ -168,7 +168,7 @@ end
 ---@field kind "literal"
 ---@field value lspm.StructureLiteral
 
----@param compile compile
+---@param compile compile_lsp
 ---@param obj lspm.StructureLiteralType
 ---@param name string
 function compileType.literal(compile, obj, name)
@@ -180,7 +180,7 @@ end
 ---@field kind "stringLiteral"
 ---@field value string
 
----@param compile compile
+---@param compile compile_lsp
 ---@param obj lspm.StringLiteralType
 ---@return string
 ---@return Buffer[]? classes
@@ -193,7 +193,7 @@ end
 ---@field kind "integerLiteral"
 ---@field value integer
 
----@param compile compile
+---@param compile compile_lsp
 ---@param obj lspm.IntegerLiteralType
 ---@return string
 ---@return Buffer[]? classes
@@ -206,7 +206,7 @@ end
 ---@field kind "booleanLiteral"
 ---@field value boolean
 
----@param compile compile
+---@param compile compile_lsp
 ---@param obj lspm.BooleanLiteralType
 ---@return string
 ---@return Buffer[]? classes
@@ -228,7 +228,7 @@ end
 ---| lspm.IntegerLiteralType
 ---| lspm.BooleanLiteralType
 
----@param compile compile
+---@param compile compile_lsp
 ---@param obj lspm.Type
 ---@param name string
 ---@return string

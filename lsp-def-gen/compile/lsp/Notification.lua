@@ -24,7 +24,7 @@ local messageDirectionMap = {
 	both = "Client <--> Server"
 }
 
----@param compile compile
+---@param compile compile_lsp
 ---@param obj lspm.Notification
 ---@return Buffer
 ---@return Buffer[]? classes

@@ -53,7 +53,7 @@ local TABLE_INTEGER_ENTRY_FORMAT = "\t%s = %d,"
 local TABLE_FOOT_FORMAT = "}"
 local RETURN_FORMAT = "return %s"
 
----@param compile compile
+---@param compile compile_lsp
 ---@param obj lspm.Enumeration
 ---@return Buffer
 ---@return Buffer[]? classes

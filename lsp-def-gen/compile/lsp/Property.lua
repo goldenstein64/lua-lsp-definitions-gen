@@ -6,7 +6,7 @@
 ---Defaults to `false`
 ---@field optional? boolean
 
----@param compile compile
+---@param compile compile_lsp
 ---@param obj lspm.Property
 ---@param parentName string
 ---@return Buffer
