@@ -18,7 +18,12 @@ local maybeMove = require("lsp-def-gen.compile.util.maybeMove")
 return function(compile, obj)
 	local buffer = compile:buffer("\n\n")
 
-	buffer:append(compile:docComment(obj.metaData.version))
+	buffer:append(compile:bufferOf({
+		sep = "\n",
+		"---@meta",
+		compile:docComment(obj.metaData.version),
+	}))
+
 	buffer:append("---@alias lsp.DocumentUri string")
 	buffer:append("---@alias lsp.URI string")
 
