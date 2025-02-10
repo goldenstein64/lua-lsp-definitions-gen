@@ -5,7 +5,7 @@ Protocol (LSP), parsable by
 [LuaLS/lua-language-server](https://github.com/LuaLS/lua-language-server).
 All LSP definitions are namespaced under `lsp`.
 
-All definitions for [goldenstein64/lua-lsp-lib](https://github.com/goldenstein64/lua-lsp-lib), my work-in-progress LSP library, are namespaced under `lsp*`.
+All definitions for [goldenstein64/lua-lsp-lib](https://github.com/goldenstein64/lua-lsp-lib), my work-in-progress LSP library, are namespaced under `lsp-lib`.
 
 This project is under MIT, so you can fork it for other kinds of type
 definitions.

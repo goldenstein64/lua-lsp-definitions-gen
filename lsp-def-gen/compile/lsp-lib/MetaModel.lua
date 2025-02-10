@@ -8,11 +8,11 @@ return function(compile, obj)
 	buffer:append("---@meta")
 
 	local responseBuffer = compile:buffer('\n\n')
-	responseBuffer:append("---@class lsp*.Response\nlocal response = {}")
+	responseBuffer:append("---@class lsp-lib.Response\nlocal response = {}")
 	local requestBuffer = compile:buffer('\n\n')
-	requestBuffer:append("---@class lsp*.Request\nlocal request = {}")
+	requestBuffer:append("---@class lsp-lib.Request\nlocal request = {}")
 	local notifyBuffer = compile:buffer('\n\n')
-	notifyBuffer:append("---@class lsp*.Notify\nlocal notify = {}")
+	notifyBuffer:append("---@class lsp-lib.Notify\nlocal notify = {}")
 
 	---@type { [string]: string }
 	local routes = {}
