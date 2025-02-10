@@ -1,4 +1,4 @@
-local json = require("dkjson").use_lpeg()
+local json = require("cjson")
 local compile_lsp = require("lsp-def-gen.compile.lsp")
 local compile_lsp_lib = require("lsp-def-gen.compile.lsp-lib")
 local lfs = require("lfs")
@@ -28,7 +28,7 @@ return function()
 		local content = data:read("a")
 
 		---@type lspm.MetaModel
-		object = assert(json.decode(content, 1, json.null))
+		object = assert(json.decode(content))
 	end
 
 	local definitions, enums = compile_lsp:metamodel(object)
